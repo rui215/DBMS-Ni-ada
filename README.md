@@ -1,4 +1,4 @@
-Group "Techytroops"
+Group "TechyTroops"
 Group Leader: Ruiz, Sevastian Dwane
 Group Members: Arreola, Reizen
                Buce, Eishna Lorin
