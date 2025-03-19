@@ -1,1 +1,1 @@
-Buce
+Tamad si Lorenz
