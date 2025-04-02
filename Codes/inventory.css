@@ -1,0 +1,23 @@
+.inventory-container {
+    padding: 20px;
+    background-color: #ffccde;
+    min-height: 100vh;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 10px;
+    border: 3px solid black;
+    text-align: center;
+  }
+  
+  button {
+    margin: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
