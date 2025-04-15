@@ -11,34 +11,39 @@ const Homepage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate(); 
+
   const handleLogin = () => {
-    
     if (username.trim() !== "" && password.trim() !== "") {
       setIsLoggedIn(true);
       navigate("/shop"); 
     }
   };
 
-  const sendMessage = async () => {
+  const chatbotResponses = {
+    "kupal ka ba?": "MASKUPAL KA TANGA",
+    "hi": "Hello! How can I assist you today?",
+    "hello": "Hi! How can I assist you today?",
+    "how are you?": "I'm just a bot, but I'm doing great! 😊",
+    "what is your name?": "I'm your friendly chatbot!",
+    "what do you do?": "I help answer your questions!",
+    "who created you?": "I was created by an awesome developer! 🚀",
+    "thank you": "You're welcome! 😊"
+  };
+
+  const sendMessage = () => {
     if (userMessage.trim() === "") return;
 
     const newMessages = [...messages, { sender: "user", text: userMessage }];
     setMessages(newMessages);
+    
+    const botResponse = Object.keys(chatbotResponses).find(key => userMessage.toLowerCase().includes(key)) || "Sorry, I don't understand that.";
+    const botReply = chatbotResponses[botResponse] || botResponse;
+    
+    setTimeout(() => {
+      setMessages([...newMessages, { sender: "bot", text: botReply }]);
+    }, 500);
+
     setUserMessage("");
-
-    try {
-      const response = await fetch("http://localhost/chatbot.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage }),
-      });
-
-      const data = await response.json();
-      setMessages([...newMessages, { sender: "bot", text: data.response }]);
-    } catch (error) {
-      console.error("Error:", error);
-      setMessages([...newMessages, { sender: "bot", text: "❌ Service Error." }]);
-    }
   };
 
   return (
@@ -99,7 +104,6 @@ const Homepage = () => {
         <button onClick={sendMessage}>Send</button>
       </div>
 
-      {/* Social Media Links */}
       <footer className="footer">
         <div className="social-links">
           <a href="https://www.facebook.com/share/1Uvz44c5Gb/" target="_blank" rel="noopener noreferrer">
